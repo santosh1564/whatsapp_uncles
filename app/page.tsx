@@ -23,10 +23,10 @@ export default function Chat() {
         {/* Header */}
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent">
-            WhatsApp Chat Bot
+            WhatsApp Uncles
           </h1>
           <p className="text-zinc-600 dark:text-zinc-400 mt-2">
-            Chat with AI powered by Gemini
+            AI ka Baaap
           </p>
         </div>
 
