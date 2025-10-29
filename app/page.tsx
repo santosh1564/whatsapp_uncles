@@ -7,7 +7,9 @@ import { X, Send } from 'lucide-react';
 
 export default function Chat() {
   const [input, setInput] = useState('');
-  const { messages, sendMessage, isLoading } = useChat();
+  const { messages, sendMessage, status } = useChat();
+  
+  const isComposing = status === 'submitted' || status === 'streaming';
 
   const handleQuickButton = (text: string) => {
     sendMessage({ text });
@@ -89,7 +91,7 @@ export default function Chat() {
             </div>
           ))}
           
-          {isLoading && (
+          {isComposing && (
             <div className="flex justify-start">
               <div className="bg-zinc-100 dark:bg-zinc-800 rounded-lg p-4 max-w-[80%]">
                 <div className="flex gap-1">
@@ -119,11 +121,11 @@ export default function Chat() {
               value={input}
               placeholder="Type your message..."
               onChange={e => setInput(e.currentTarget.value)}
-              disabled={isLoading}
+              disabled={isComposing}
             />
             <button
               type="submit"
-              disabled={isLoading || !input.trim()}
+              disabled={isComposing || !input.trim()}
               className="px-6 py-3 bg-green-500 hover:bg-green-600 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white rounded-full transition-colors flex items-center gap-2"
             >
               <Send className="w-5 h-5" />
@@ -133,7 +135,7 @@ export default function Chat() {
                 type="button"
                 onClick={() => setInput('')}
                 className="px-6 py-3 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-full transition-colors flex items-center"
-                disabled={isLoading}
+                disabled={isComposing}
               >
                 <X className="w-5 h-5" />
               </button>
