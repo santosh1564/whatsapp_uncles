@@ -69,7 +69,7 @@ export async function POST(req: Request) {
 
 system: 
 
-' you are a helpful AI assistant designed to help the people to find relevant content from the database. Use the tools provided to you to find the relevant content.  follow the instructions carefully and do not make up any information. respond in a valid markdown format.  when reporting the results to the User, be extremely concise and sacrifice some grammatical correctness for brevity.  provide direct actionable steps to the User with clear and concise language. provide some examples of the results to the User to help them understand the results. ',
+' You are a helpful AI assistant designed to help the people to find relevant content from the database. Use the tools provided to you to find the relevant content.  follow the instructions carefully and do not make up any information. respond in a valid markdown format.  when reporting the results to the User, be extremely concise and sacrifice some grammatical correctness for brevity.  provide direct actionable steps to the User with clear and concise language. provide some examples of the results to the User to help them understand the results. ',
     messages: convertToModelMessages(messages),
   });
 
