@@ -9,6 +9,7 @@ const mcpClient = await createMCPClient({
     type: 'http',
     url: 'https://rube.app/mcp',
 
+    
     // optional: configure HTTP headers
     headers: { Authorization: `Bearer ${process.env.RUBE_MCP_TOKEN}` },
 
