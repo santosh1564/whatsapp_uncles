@@ -10,7 +10,7 @@ const mcpClient = await createMCPClient({
     url: 'https://rube.app/mcp',
 
     // optional: configure HTTP headers
-    headers: { Authorization: `Bearer ${process.env.RUBE_MCP_TOKEN} ` },
+    headers: { Authorization: `Bearer ${process.env.RUBE_MCP_TOKEN}` },
 
     // optional: provide an OAuth client provider for automatic authorization
    // authProvider: myOAuthClientProvider,
