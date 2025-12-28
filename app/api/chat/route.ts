@@ -3,27 +3,28 @@ import { google } from '@ai-sdk/google';
 import { streamText, UIMessage, convertToModelMessages, stepCountIs } from 'ai';
 import z from 'zod';
 import { createMCPClient } from '@ai-sdk/mcp';
+import { env } from '@/lib/env.mjs';
 
-const mcpClient = await createMCPClient({
-  transport: {
-    type: 'http',
-    url: 'https://rube.app/mcp',
 
-    
-    // optional: configure HTTP headers
-    headers: { Authorization: `Bearer ${process.env.RUBE_MCP_TOKEN}` },
-
-    // optional: provide an OAuth client provider for automatic authorization
-   // authProvider: myOAuthClientProvider,
-  },
-});
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
-
+  const mcpClient = await createMCPClient({
+    transport: {
+      type: 'http',
+      url: 'https://rube.app/mcp',
+  
+      
+      // optional: configure HTTP headers
+      headers: { Authorization: `Bearer ${env.RUBE_MCP_TOKEN}` },
+  
+      // optional: provide an OAuth client provider for automatic authorization
+     // authProvider: myOAuthClientProvider,
+    },
+  });
   const tools = await mcpClient.tools();
 
   const result = streamText({
@@ -31,6 +32,7 @@ export async function POST(req: Request) {
     model: 'anthropic/claude-haiku-4.5',
     stopWhen: stepCountIs(20),
     tools: {
+      ...tools,
      //  ...await mcpClient.tools()
 /*      get_relevant_content: {
         description: "Get relevant content from the database",
